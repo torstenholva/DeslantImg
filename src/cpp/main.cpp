@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
   std::string inPath = "";
   std::string midPath = "";
   std::string inDir = "../";
-  std::string outDir = "../02_deslanted/";
-  
+  std::string outDir = "../01_deslanted/";
+
   for (int i = 1; i < argc; ++i) {
     if (std::string(argv[i]) == "--inpath") {
       if (i + 1 < argc) { // Make sure we aren't at the end of argv!
@@ -56,10 +56,11 @@ int main(int argc, char* argv[])
   }
 
   inDir = inDir + inPath;
-  // std::cout << inDir + " => ../02_deslanted/" << std::endl;
+  // std::cout << inDir + " => " + outDir << std::endl;
 
   try {
     if (stat(std::string(outDir + midPath).c_str(), &sb) != 0 && !S_ISDIR(sb.st_mode)) {
+      std::cout << std::string("Create directory: " + outDir + midPath) << std::endl;
       mkdir(std::string(outDir + midPath).c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     }
 
